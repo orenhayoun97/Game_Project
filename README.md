@@ -1,24 +1,24 @@
 # SIM-LIFE Simulator
 A character simulator based on advanced object oriented programming (OOP) principles in C++.
 The Project simulates a character management system, witch allows for tracking personal metrics,
-skill development, and managing items and rewards.
+skill development, and managing items and awards.
 
 ## Cure Features
 * Full character menagement: Create and manage Sims with real time tracking of age, hunger and energy levels.
 * Polymorphic Progression System: Develop skills such as painting, chess and dancing, with proficiency levels.
-* Polymorphic Item Handling: Utilizes inhgeritance to manage different game items.
+* Polymorphic Item Handling: Utilizes inheritance to manage different game items such as `Award` and `Purchasable`.
 * Custom Generic Container: Features a hand-coded `ResizableArray<T>` template to handle dynamic memory and object pointers efficiently.
 
 ## Architecture and Class Structure
 
 ### Core Logic
 * `Sim` : The central entity managing persona data, a `ResizableArray` of skills, and a pointer of a `GameItem`.
-* `Skill`: Represents specific abilities with methods like `practice()` to increase level and `forget()` to decrease it.
+* `Skill`: Represents specific abilities with many methods like `practice()` to increase level and `forget()` to decrease it.
 * `ResizableArray<T>`: A template class for dynamic arrays that handles automatic resizing and ensures deep copies of objects.
 
-### Inheritance and Polymorphhism
-* `GameItme`: The abstract base class for all items.
-* `Purchasable`: A derived class representing items with a specific price in "Simolians".
+### inheritance and Polymorphism
+* `GameItem`: The abstract base class for all items.
+* `Purchasable`: A derived class representing items with a specific price in "Simolians" (game's money).
 * `Award`: A derived class representing honorary titles or achievements given to a Sim.
 
 ## Technical Highlights
