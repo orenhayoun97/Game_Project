@@ -37,17 +37,8 @@ public:
 	friend ostream& operator<<(ostream& out, const ResizableArray& ra);//prints the array
 };
 template<class T>
-ResizableArray<T>::ResizableArray(const ResizableArray& other) : currentSize(other.currentSize), maxSize(other.maxSize)
-{
-	if (other.objArray != nullptr)
-	{
-		this->objArray = new T * [other.maxSize];
-		for (int i = 0; i < currentSize; i++)
-		{
-			this->objArray[i] = new T(*other.objArray[i]);
-		}
-	}
-}
+ResizableArray<T>::ResizableArray(const ResizableArray& other) : currentSize(other.currentSize), maxSize(other.maxSize) {}
+
 template<class T>
 ResizableArray<T>& ResizableArray<T>::operator=(const ResizableArray& rhs)
 {
@@ -61,13 +52,6 @@ ResizableArray<T>& ResizableArray<T>::operator=(const ResizableArray& rhs)
 		this->currentSize = rhs.currentSize;
 		this->maxSize = rhs.maxSize;
 		this->objArray = new T * [this->maxSize];
-		if (rhs.objArray != nullptr)
-		{
-			for (int i = 0; i < currentSize; i++)
-			{
-				this->objArray[i] = new T(*rhs.objArray[i]);
-			}
-		}
 	}
 	return *this;
 }
