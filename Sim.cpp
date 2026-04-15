@@ -1,5 +1,6 @@
 #pragma warning(disable : 4996)
 #include <iostream>
+#include <cstring>
 #include "Skill.h"
 #include "Sim.h"
 using namespace std;
@@ -21,45 +22,37 @@ Sim& Sim::operator=(const Sim& rhs)
 {
 	if (this != &rhs)
 	{
-		
 		this->age = rhs.age;
 		this->hunger = rhs.hunger;
 		this->energy = rhs.energy;
-		delete this->item;
-		this->item = nullptr;
-		delete this->name;
+		delete[] this->name;
 		this->name = nullptr;
 		this->skills.empty();
-
-		if (rhs.item != nullptr)
+		this->item.empty();
+		for (int i = 0; i < rhs.item.getSize(); i++)
 		{
-			Purchasable* temp = dynamic_cast<Purchasable*>(rhs.item);
-			if (temp) // buy item
+			GameItem* original = rhs.item[i];
+			Purchasable* p = dynamic_cast<Purchasable*>(original);
+			if (p) // buy item
 			{
-				this->item = new Purchasable(temp->getName() , temp->getPrice());
+				this->item.pushBack(new Purchasable(p->getName() , p->getPrice()));
 			}
 			else // Award
 			{
-				this->item = new Award(temp->getName());
+				this->item.pushBack(new Award(original->getName()));
 			}
-			delete temp;
 		}
-
 		this->name = _strdup(rhs.name);
 		for (int i = 0; i < rhs.skills.getSize(); i++)
 			this->skills.pushBack(new Skill(*rhs.skills[i]));
-
 	}
-
 	return *this;
 }
-
 // Destructor
 Sim::~Sim() {
+	item.empty(); // new
 	delete[] name;
 	name = nullptr;
-	delete item;
-	item = nullptr;
 }
 
 // Getters
@@ -144,7 +137,7 @@ void Sim::printSim() const
 	cout << "SKILLS:\n";
 	for (int i = 0; i < 6; i++)
 	{
-		cout << (unsigned char)196;
+		cout << "-";
 	}
 	cout << '\n';
 	for (int i = 0; i < skills.getSize(); i++)
@@ -155,11 +148,21 @@ void Sim::printSim() const
 	cout << "ITEMS:\n";
 	for (int i = 0; i < 6; i++)
 	{
-		cout << (unsigned char)196;
+		cout << "-";
 	}
 	cout << '\n';
-	if (item != nullptr)
-		cout << *item << endl;
+	if (item.getSize() == 0)
+	{
+		cout << "No items yet...\n";
+	}
+	else
+	{
+		for (int i = 0; i < item.getSize(); i++)
+		{
+			cout << i + 1 << ") " << *item[i] << endl;
+		}
+
+	}
 }
 
 void Sim::practice(int skillType)
@@ -189,21 +192,11 @@ void Sim::forget() const
 }
 bool Sim::buyItem(const char* itemName, int price)
 {
-	if (item != nullptr)
-	{
-		std::cout << "Item/Award exist!" << std::endl;
-		return false;
-	}
-	item = new Purchasable(itemName, price);
+	item.pushBack(new Purchasable(itemName, price));
 	return true;
 }
 bool Sim::receiveAward(const char* title)
 {
-	if (item != nullptr)
-	{
-		std::cout << "Item/Award exist!" << std::endl;
-		return false;
-	}
-	item = new Award(title);
+	item.pushBack(new Award(title));
 	return true;
 }
