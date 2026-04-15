@@ -17,7 +17,6 @@ private:
 
 public:
 	ResizableArray() = default;//default constructor
-	//ResizableArray(T arr[], int size);//constructs from an array
 	ResizableArray(const ResizableArray& other);//copy constructor
 	ResizableArray& operator=(const ResizableArray& rhs);//copy assignment
 	~ResizableArray();//destructor
