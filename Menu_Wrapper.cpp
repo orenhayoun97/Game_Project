@@ -1,6 +1,8 @@
 #include <iostream>
 #include "Menu_Wrapper.h"
 #include <cstdlib>//for system("cls") which clears the console screen. NOTE - might not be cross-Platform compatible
+#include <limits>
+#include <cstring>
 using namespace std;
 
 const char* Menu_Wrapper::info = "***** !Error! ***** ";
@@ -29,7 +31,7 @@ void Menu_Wrapper::run()
 		cout << mainGameObject;
 		printMenu();
 		userChoice = basicValidateInteger();//input until a valid integer
-		system("cls");//clear screen, might not be portable
+		// system("cls");//clear screen, might not be portable
 
 		switch (userChoice)//this switch should use enum classes but some students did not learn this feature.
 		{
