@@ -5,7 +5,7 @@ using std::ostream;
 class Skill
 {
 private:
-	int type;//should be an enum class, but some groups do not learn this feature
+	int type;
 	int skillLevel = 3;//a number between [0-100]. 0 is lowest skill. 100 is highest skill
 
 	static const char* skillTypeStrings[];
