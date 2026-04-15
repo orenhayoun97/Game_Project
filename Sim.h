@@ -1,5 +1,5 @@
-#ifndef __SIM_CLASS_HW2_
-#define __SIM_CLASS_HW2_
+#ifndef __SIM_CLASS__
+#define __SIM_CLASS__
 #include "Skill.h"
 #include "ResizableArray.h"
 #include "Purchasable.h"
@@ -53,4 +53,4 @@ public:
     friend ostream& operator<<(ostream& out, const Sim& s) { s.printSim(); return out; }
 };
 
-#endif // !__SIM_CLASS_HW2_
+#endif // !__SIM_CLASS__
