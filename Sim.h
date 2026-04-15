@@ -1,7 +1,6 @@
 #ifndef __SIM_CLASS_HW2_
 #define __SIM_CLASS_HW2_
 #include "Skill.h"
-//#include "ResizableSkillArray.h"
 #include "ResizableArray.h"
 #include "Purchasable.h"
 #include "Award.h"
@@ -16,10 +15,9 @@ private:
     int age = 0;
     int hunger = 50;
     int energy = 50;
-   // ResizableSkillArray skills;
     ResizableArray<Skill> skills;
     void printSim() const;
-    GameItem* item = nullptr;
+    ResizableArray<GameItem> item;
 
 public:
     // Constructors
